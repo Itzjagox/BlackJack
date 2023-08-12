@@ -23,13 +23,13 @@ export const AddJugadores = () => {
     let number = i + 1;
     AddJugador.innerHTML =
       i === Number(cant)
-        ? "Computadora - <span>0</span>"
+        ? "Computadora - <span id='puntosComputadora'>0</span>"
         : "Jugador " + number + `- <span id=player_${number}>0</span>`;
     divMesa.append(AddJugador);
 
     // Agregamos el div de los jugadores para las cartas
     AddDivJugadores.classList.add("player");
-    AddDivJugadores.id = `player${number}`; // para agregar las cartas al jugador que tenga el turno
+    AddDivJugadores.id = i === Number(cant) ? "computadora" : `player${number}`; // para agregar las cartas al jugador que tenga el turno
     divMesa.append(AddDivJugadores);
   }
 

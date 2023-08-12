@@ -1,15 +1,20 @@
-import { AddJugadores, CrearMazo, PedirCarta, Turno } from "./usecases";
+import {
+  AddJugadores,
+  CrearMazo,
+  PedirCarta,
+  Turno,
+  TurnoComputadora,
+  ValorCarta,
+} from "./usecases";
 
 (() => {
   "use strict";
-
   //
   let puntajeJugador = 0;
+  let puntajeComputadora = 0;
 
   // Referencias del HTML
   const btnPedirCarta = document.querySelector("#btnPedir"),
-    puntosComputadora = document.querySelector("#puntosComputadora"),
-    divComputadora = document.querySelector("#computadora"),
     btnDetener = document.querySelector("#btnDetener"),
     btnNuevo = document.querySelector("#btnNuevo");
 
@@ -25,15 +30,6 @@ import { AddJugadores, CrearMazo, PedirCarta, Turno } from "./usecases";
   let [puntosJugador, divPlayer] = Turno(i);
 
   // Funcion para obtener el valor de la carta
-  const ValorCarta = (carta) => {
-    let splitCarta = carta.substring(0, carta.length - 1);
-
-    return isNaN(splitCarta)
-      ? splitCarta === "A"
-        ? 11
-        : 10
-      : Number(splitCarta);
-  };
 
   // Evento click pedir carta
   btnPedirCarta.addEventListener("click", () => {
@@ -58,13 +54,27 @@ import { AddJugadores, CrearMazo, PedirCarta, Turno } from "./usecases";
     }, 50);
   });
 
-  // Evento turno computadora
   btnDetener.addEventListener("click", () => {
-    if (i === jugadores.length) null;
+    jugadores[i] = puntajeJugador;
     i += 1;
-    [puntosJugador, divPlayer] = Turno(i);
-    puntajeJugador = 0;
-    //TurnoComputadora(puntajeJugador);
+
+    if (i < jugadores.length - 1) {
+      [puntosJugador, divPlayer] = Turno(i);
+      puntajeJugador = 0;
+    }
+
+    if (i >= jugadores.length - 1) {
+      let puntajeMinimo = jugadores[0]; // Asumimos que el primer valor es el mayor e iteramos
+      let index = 0; // Index por defecto
+
+      for (const value of jugadores) {
+        if (puntajeMinimo < value && value <= 21) {
+          puntajeMinimo = value;
+          index += 1;
+        }
+      }
+      TurnoComputadora(puntajeMinimo, puntajeComputadora, deck, index);
+    }
   });
 
   btnNuevo.addEventListener("click", () => {
