@@ -4,9 +4,35 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+    crossorigin="anonymous"
+  />
     <title>Vite App</title>
   </head>
   <body>
+
+    <!-- inicia contenedor Principal -->
+    <section id="main-container">
+      <!-- inicio header -->
+      <header class="header">
+        <h2>BlackJack</h2>
+      </header>
+      <!-- fin header -->
+
+      <!-- inicio contenedor mesa de juego -->
+      <section id="table-game">
+        <div class="row mt-2">
+          <div class="col text-center" id="btn">
+            <button id="btnNuevo" class="btn btn-danger">Nuevo Juego</button>
+            <button id="btnPedir" class="btn btn-primary">Pedir Carta</button>
+            <button id="btnDetener" class="btn btn-primary">Detener</button>
+          </div>
+        </div>        
+      </section>
+
     <div id="app"></div>
     <script type="module" src="/main.js"></script>
   </body>
