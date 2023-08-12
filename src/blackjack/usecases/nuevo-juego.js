@@ -1,9 +1,17 @@
 import { CrearMazo } from "./crear-baraja";
 import { AddJugadores } from "./add-jugadores";
 // Funcion para reiniciar el juego
-export const NuevoJuego = (tipos, especiales) => {
-  CrearMazo(tipos, especiales);
 
+let deck = [];
+
+/**
+ *
+ * @param {Array<string>} tipos
+ * @param {Array<string>} especiales
+ * @returns {number , Array<string>}
+ */
+export const NuevoJuego = (tipos, especiales) => {
+  deck = CrearMazo(tipos, especiales);
   let divPlayers = document.querySelectorAll(".carta");
 
   for (const item of divPlayers) {
@@ -17,5 +25,5 @@ export const NuevoJuego = (tipos, especiales) => {
   }
 
   //AddJugadores();
-  return 0;
+  return [0, deck];
 };

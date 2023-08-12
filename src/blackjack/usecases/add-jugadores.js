@@ -4,7 +4,15 @@ let jugadores = [];
 const divMesa = document.querySelector("#table-game");
 
 export const AddJugadores = () => {
-  const cant = prompt("Ingrese la Cantidad de jugadores");
+  let cant = 0;
+
+  while (Number(cant) === 0) {
+    cant = prompt("Ingrese la Cantidad de jugadores");
+
+    if (isNaN(cant)) {
+      cant = 0;
+    }
+  }
 
   for (let i = 0; i <= cant; i++) {
     jugadores[i] = 0;

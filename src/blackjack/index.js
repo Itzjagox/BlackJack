@@ -9,7 +9,7 @@ import {
   puntMinimo,
 } from "./usecases";
 
-(() => {
+export const gameinit = () => {
   "use strict";
   //
   let puntajeJugador = 0;
@@ -18,7 +18,8 @@ import {
   // Referencias del HTML
   const btnPedirCarta = document.querySelector("#btnPedir"),
     btnDetener = document.querySelector("#btnDetener"),
-    btnNuevo = document.querySelector("#btnNuevo");
+    btnNuevo = document.querySelector("#btnNuevo"),
+    btnReset = document.querySelector("#btnReset");
 
   const tipos = ["C", "D", "H", "S"],
     especiales = ["A", "J", "Q", "K"];
@@ -28,7 +29,7 @@ import {
 
   // Se agregan los jugadores
   const jugadores = AddJugadores();
-  const deck = CrearMazo(tipos, especiales);
+  let deck = CrearMazo(tipos, especiales);
 
   // Turno
   let i = 0;
@@ -71,10 +72,12 @@ import {
 
     if (i < jugadores.length - 1) {
       [puntosJugador, divPlayer] = Turno(i);
+      2;
       puntajeJugador = 0;
     }
 
     if (i >= jugadores.length - 1) {
+      2;
       btnDetener.disabled = true;
       btnPedirCarta.disabled = true;
 
@@ -85,7 +88,8 @@ import {
   });
 
   btnNuevo.addEventListener("click", () => {
-    i = NuevoJuego(tipos, especiales);
+    deck = [];
+    [i, deck] = NuevoJuego(tipos, especiales);
     [puntosJugador, divPlayer] = Turno(i);
     puntajeJugador = 0;
     puntajeComputadora = 0;
@@ -93,4 +97,8 @@ import {
     btnPedirCarta.disabled = false;
     btnDetener.disabled = false;
   });
-})();
+
+  btnReset.addEventListener("click", () => {
+    location.reload();
+  });
+};
