@@ -1,3 +1,4 @@
+export { NuevoJuego } from "./nuevo-juego";
 export { ValorCarta } from "./valor-carta";
 export { TurnoComputadora } from "./turno-computadora";
 export { Turno } from "./turno-jugador";

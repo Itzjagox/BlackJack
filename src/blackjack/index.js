@@ -5,6 +5,7 @@ import {
   Turno,
   TurnoComputadora,
   ValorCarta,
+  NuevoJuego,
 } from "./usecases";
 
 (() => {
@@ -28,9 +29,7 @@ import {
   // Turno
   let i = 0;
   let [puntosJugador, divPlayer] = Turno(i);
-
-  // Funcion para obtener el valor de la carta
-
+  btnNuevo.disabled = true;
   // Evento click pedir carta
   btnPedirCarta.addEventListener("click", () => {
     const carta = PedirCarta(deck);
@@ -64,6 +63,9 @@ import {
     }
 
     if (i >= jugadores.length - 1) {
+      btnDetener.disabled = true;
+      btnPedirCarta.disabled = true;
+
       let puntajeMinimo = jugadores[0]; // Asumimos que el primer valor es el mayor e iteramos
       let index = 0; // Index por defecto
 
@@ -74,10 +76,17 @@ import {
         }
       }
       TurnoComputadora(puntajeMinimo, puntajeComputadora, deck, index);
+      btnNuevo.disabled = false;
     }
   });
 
   btnNuevo.addEventListener("click", () => {
-    NuevoJuego();
+    i = NuevoJuego(tipos, especiales);
+    [puntosJugador, divPlayer] = Turno(i);
+    puntajeJugador = 0;
+    puntajeComputadora = 0;
+    btnNuevo.disabled = true;
+    btnPedirCarta.disabled = false;
+    btnDetener.disabled = false;
   });
 })();

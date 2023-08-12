@@ -14,8 +14,8 @@ export const TurnoComputadora = (
   deck,
   index
 ) => {
-  const puntosComputadora = document.querySelector("#puntosComputadora"),
-    divComputadora = document.querySelector("#computadora");
+  let puntosComputadora = document.querySelector("#puntosComputadora");
+  let divComputadora = document.querySelector("#computadora");
 
   do {
     const carta = PedirCarta(deck);
@@ -37,7 +37,4 @@ export const TurnoComputadora = (
       alert(`El jugador ${index + 1} ha ganado`);
     }
   }, 50);
-
-  btnPedirCarta.disabled = true;
-  btnDetener.disabled = true;
 };

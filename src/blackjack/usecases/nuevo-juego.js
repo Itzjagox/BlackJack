@@ -1,17 +1,21 @@
+import { CrearMazo } from "./crear-baraja";
+import { AddJugadores } from "./add-jugadores";
 // Funcion para reiniciar el juego
-const NuevoJuego = () => {
-    mazo = [];
-    CrearMazo();
+export const NuevoJuego = (tipos, especiales) => {
+  CrearMazo(tipos, especiales);
 
-    puntajeComputadora = 0;
-    puntajeJugador = 0;
+  let divPlayers = document.querySelectorAll(".carta");
 
-    divPlayer1.innerHTML = "";
-    divComputadora.innerHTML = "";
+  for (const item of divPlayers) {
+    item.remove();
+  }
 
-    puntosJugador.textContent = 0;
-    puntosComputadora.textContent = 0;
+  let puntos = document.querySelectorAll(".puntos");
 
-    btnPedirCarta.disabled = false;
-    btnDetener.disabled = false;
-  };
+  for (const item of puntos) {
+    item.innerHTML = "0";
+  }
+
+  //AddJugadores();
+  return 0;
+};
