@@ -6,6 +6,7 @@ import {
   TurnoComputadora,
   ValorCarta,
   NuevoJuego,
+  puntMinimo,
 } from "./usecases";
 
 (() => {
@@ -21,6 +22,9 @@ import {
 
   const tipos = ["C", "D", "H", "S"],
     especiales = ["A", "J", "Q", "K"];
+
+  let puntajeMinimo = 0,
+    index = 0;
 
   // Se agregan los jugadores
   const jugadores = AddJugadores();
@@ -49,6 +53,14 @@ import {
         i += 1;
         [puntosJugador, divPlayer] = Turno(i);
         puntajeJugador = 0;
+
+        if (i >= jugadores.length - 1) {
+          btnDetener.disabled = true;
+          btnPedirCarta.disabled = true;
+          [puntajeMinimo, index] = puntMinimo(jugadores);
+          TurnoComputadora(puntajeMinimo, puntajeComputadora, deck, index);
+          btnNuevo.disabled = false;
+        }
       }
     }, 50);
   });
@@ -66,15 +78,7 @@ import {
       btnDetener.disabled = true;
       btnPedirCarta.disabled = true;
 
-      let puntajeMinimo = jugadores[0]; // Asumimos que el primer valor es el mayor e iteramos
-      let index = 0; // Index por defecto
-
-      for (const value of jugadores) {
-        if (puntajeMinimo < value && value <= 21) {
-          puntajeMinimo = value;
-          index += 1;
-        }
-      }
+      [puntajeMinimo, index] = puntMinimo(jugadores);
       TurnoComputadora(puntajeMinimo, puntajeComputadora, deck, index);
       btnNuevo.disabled = false;
     }
